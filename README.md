@@ -24,7 +24,7 @@ A package to use cameras in ros-independent manner and with deoxys_control (to m
 [Yifeng Zhu](https://cs.utexas.edu/~yifengz), [Zhenyu Jiang](https://zhenyujiang.me/) -->
 
 
-# Installation
+## Installation
 
 ```
 1. Setup [deoxys_control](https://github.com/UT-Austin-RPL/deoxys_control/tree/main/deoxys) (This usually should be setup)
@@ -42,14 +42,15 @@ pip install pre-commit
 pre-commit install
 ``` -->
 
-## Usage
+
+## Setup
 
 ### Set up the AprilTag on the Panda arm as shown
 ![alt text](docs/_images/apriltag.png)
 
 ### Connect Spacemouse
 
-### Eye-to-Hand Calibration
+## Usage: Eye-to-Hand Calibration
 
 This is to calibrate the fixed-base camera. This assumes that a marker mount is attached to the robot’s end-effector, and the marker is default to be AprilTag in our lab
 
@@ -77,6 +78,8 @@ There are two useful options for running this script. One is --use-saved-images,
 
 #### Step 3: Saved config file
 The calibrated value will be saved into the file camera_{ID}_extrinsics.json in the default folder ~/.deoxys_vision/calibration.
+
+## Usage: Eye-in-Hand Calibration
 
 <!-- # Interfaces
 
