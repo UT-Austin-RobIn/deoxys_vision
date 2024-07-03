@@ -47,7 +47,7 @@ pre-commit install
 
 ### Set up the AprilTag on the Panda arm as shown
 <!-- ![alt text](docs/_images/apriltag.png) -->
-<img src="docs/_images/apriltag.png" alt="drawing" width="50"/>
+<img src="docs/_images/apriltag.png" alt="drawing" width="200"/>
 
 ### Connect Spacemouse
 
