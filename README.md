@@ -1,8 +1,8 @@
-<p align="center">
+<!-- <p align="center">
 <img src="./deoxys_vision_pull_figure.png" height="400">
-</p>
+</p> -->
 
-<p align="center">
+<!-- <p align="center">
 <a href="https://github.com/UT-Austin-RPL/deoxys_vision/actions">
 <img alt="Tests Passing" src="https://github.com/anuraghazra/github-readme-stats/workflows/Test/badge.svg" />
 </a>
@@ -11,34 +11,36 @@
 </a>
 <a href="https://github.com/UT-Austin-RPL/deoxys_vision/issues">
 <img alt="Issues" src="https://img.shields.io/github/issues/UT-Austin-RPL/deoxys_control?color=0088ff" />
-</a>
+</a> -->
 
 [**[Documentation]**](https://ut-austin-rpl.github.io/deoxys_vision/html/index.html) &ensp; 
 
 
 <h1 align="center">Deoxys Vision Utils</h1>
 
-A package to use cameras in ros-independent manner. Currently internal
-use within UT RPL group.
+A package to use cameras in ros-independent manner. 
 
-### Authors
-[Yifeng Zhu](https://cs.utexas.edu/~yifengz), [Zhenyu Jiang](https://zhenyujiang.me/)
+<!-- ### Authors
+[Yifeng Zhu](https://cs.utexas.edu/~yifengz), [Zhenyu Jiang](https://zhenyujiang.me/) -->
 
 
 # Installation
 
 ```
-pip install -e .
+1. Setup [deoxys_control](https://github.com/UT-Austin-RPL/deoxys_control/tree/main/deoxys) (This usually should be setup)
+2. Activate the conda environment (Usually should be deoxys_base)
+3. go into deoxys_vision folder
+4. pip install -e .
 ```
 
-## Development
+<!-- ## Development
 
 Enable auto formatting.
 
 ```
 pip install pre-commit
 pre-commit install
-```
+``` -->
 
 ## Usage
 
