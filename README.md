@@ -45,11 +45,11 @@ pre-commit install
 
 ## Setup
 
-### Set up the AprilTag on the Panda arm as shown
+#### Step 1: Set up the AprilTag on the Panda arm as shown
 <!-- ![alt text](docs/_images/apriltag.png) -->
-<img src="docs/_images/apriltag.png" alt="drawing" width="200"/>
+<img src="docs/_images/apriltag.png" alt="drawing" width="500"/>
 
-### Connect Spacemouse
+#### Step 2: Connect Spacemouse
 
 ## Usage: Eye-to-Hand Calibration
 
