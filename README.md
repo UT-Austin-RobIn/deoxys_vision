@@ -18,7 +18,7 @@
 
 <h1 align="center">Deoxys Vision Utils</h1>
 
-A package to use cameras in ros-independent manner. 
+A package to use cameras in ros-independent manner and with deoxys_control (to move the robot to collect apriltag images)
 
 <!-- ### Authors
 [Yifeng Zhu](https://cs.utexas.edu/~yifengz), [Zhenyu Jiang](https://zhenyujiang.me/) -->
@@ -29,7 +29,7 @@ A package to use cameras in ros-independent manner.
 ```
 1. Setup [deoxys_control](https://github.com/UT-Austin-RPL/deoxys_control/tree/main/deoxys) (This usually should be setup)
 2. Activate the conda environment (Usually should be deoxys_base)
-3. go into deoxys_vision folder
+3. Navigate into deoxys_vision folder
 4. pip install -e .
 ```
 
@@ -44,19 +44,41 @@ pre-commit install
 
 ## Usage
 
-### Running the camera nodes through redis server
+### Set up the AprilTag on the Panda arm as shown
+![alt text](docs/_images/apriltag.png)
+
+### Connect Spacemouse
+
+### Eye-to-Hand Calibration
+
+This is to calibrate the fixed-base camera. This assumes that a marker mount is attached to the robot’s end-effector, and the marker is default to be AprilTag in our lab
+
+#### Step 1: Record robot joints
+Run the script:
 ``` shell
-python
+python camera_calibration/record_robot_joints.py
 ```
 
-### Hand-Eye Camera Calibration
+The robot will run with OSC controller, with low-impedance value. In that case, it’s easy to move the arm around and record the desired joint values. For recording, press the grasping button of SpaceMouse. When you want to finish the process, press the other button of SpaceMouse which will terminate the process and let you decide 1) whether or not save the recorded joints, and 2) specify the file name to record the joints.
+
+In order to see which joints are good for detecting tags, we suggest opening up the visualization of camera (and let this keep running):
 
 ``` shell
-
+python scripts/run_camera_node.py --camera-type rs
+                                  --camera-id 0 
+                                  --no-depth --eval --visualization
 ```
 
+#### Step 2: Replay robot joints and compute the extrinsics (the transformation of camera from the robot base frame)
+```shell
+python camera_calibration/fixed_base_calibration.py
+```
+There are two useful options for running this script. One is --use-saved-images, which will use the previously recorded images without actually running the robot. Another one is --debug, which will show some detailed information of the calibration process.
 
-# Interfaces
+#### Step 3: Saved config file
+The calibrated value will be saved into the file camera_{ID}_extrinsics.json in the default folder ~/.deoxys_vision/calibration.
+
+<!-- # Interfaces
 
 ## Kinect Interface
 Before we begin, there are several prerequisites if you build k4a SDK from source:
@@ -154,4 +176,4 @@ Currently we use redis server. Follow the instruction of their
 documentation](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-linux/). After
 installation, edit the file `/etc/redis/redis.conf` with sudo access,
 comment out the original line of `bind 127.0.0.1 ::1` and add a new
-line that binds to your own IP. 
+line that binds to your own IP.  -->
