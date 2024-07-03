@@ -61,27 +61,32 @@ Run the script:
 python camera_calibration/record_robot_joints.py
 ```
 
-The robot will run with OSC controller, with low-impedance value. In that case, it’s easy to move the arm around and record the desired joint values. For recording, press the grasping button of SpaceMouse. When you want to finish the process, press the other button of SpaceMouse which will terminate the process and let you decide 1) whether or not save the recorded joints, and 2) specify the file name to record the joints.
+The robot will run with OSC controller, with low-impedance value. In that case, it’s easy to move the arm around and record the desired joint values. For recording, press the grasping button of SpaceMouse (one of the buttons on the side). When you want to finish the process, press the other button of SpaceMouse which will terminate the process and let you decide 1) whether or not save the recorded joints, and 2) specify the file name to record the joints.
 
-In order to see which joints are good for detecting tags, we suggest opening up the visualization of camera (and let this keep running):
+In order to see which joints are good for detecting tags, we suggest opening up the visualization of camera (and leave it running):
 
 ``` shell
-python scripts/run_camera_node.py --camera-type rs
-                                  --camera-id 0 
-                                  --no-depth --eval --visualization
+python scripts/deoxys_camera_node.py --camera-ref rs_0 --use-rgb --use-depth --use-rec --visualization --eval
 ```
 
 #### Step 2: Replay robot joints and compute the extrinsics (the transformation of camera from the robot base frame)
 ```shell
-python camera_calibration/fixed_base_calibration.py
+python camera_calibration/hand_eye_calibration.py --camera-ref rs_0 --calibration-type eye-to-hand --config-filename calibration_joints.json
 ```
 There are two useful options for running this script. One is --use-saved-images, which will use the previously recorded images without actually running the robot. Another one is --debug, which will show some detailed information of the calibration process.
 
 #### Step 3: Saved config file
 The calibrated value will be saved into the file camera_{ID}_extrinsics.json in the default folder ~/.deoxys_vision/calibration.
 
-## Usage: Eye-in-Hand Calibration
+#### Step 4: (Optional step)
+To test if the calibration was successful use the following script. Ensure that the calibrated value (the extrinsic matrix) from camera_{ID}_extrinsics.json is being used
 
+```shell
+python scripts/test_calibration.py --camera-ref rs_0 --calibration-method horaud
+```
+
+## Usage: Eye-in-Hand Calibration
+TODO
 <!-- # Interfaces
 
 ## Kinect Interface
